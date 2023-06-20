@@ -21,6 +21,7 @@ public class DataSourceConfig {
             String url = dbConfig.get("url");
             String username = dbConfig.get("username");
             String password = dbConfig.get("password");
+            System.out.println(url);
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl(url);
             config.setUsername(username);

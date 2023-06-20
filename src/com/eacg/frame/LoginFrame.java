@@ -38,6 +38,8 @@ public class LoginFrame extends JFrame {
         add(registerButton);
         add(loginButton);
 
+        usernameField.setText("cnflwzh");
+        passwordField.setText("12345678");
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
