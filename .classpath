@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WangZhihao/library"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="library/HikariCP-5.0.1.jar"/>
+	<classpathentry kind="lib" path="library/hutool-all-5.8.15.jar"/>
+	<classpathentry kind="lib" path="library/mysql-connector-j-8.0.32.jar"/>
+	<classpathentry kind="lib" path="library/protobuf-java-3.21.9.jar"/>
+	<classpathentry kind="lib" path="library/slf4j-api-2.0.0-alpha1.jar"/>
+	<classpathentry kind="lib" path="library/snakeyaml-2.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
