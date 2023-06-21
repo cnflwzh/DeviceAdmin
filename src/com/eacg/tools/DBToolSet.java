@@ -65,7 +65,6 @@ public class DBToolSet {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception, possibly rethrow as a specific checked exception
         }
     }
 

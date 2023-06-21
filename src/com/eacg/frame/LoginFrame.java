@@ -57,7 +57,9 @@ public class LoginFrame extends JFrame {
                 List<Map<String, Object>> users = DBToolSet.selectSQL(sql, username, password);
 
                 if (!users.isEmpty()) {
-                   new DeviceInfoFrame().setVisible(true);
+                   DeviceInfoFrame deviceInfoFrame = new DeviceInfoFrame();
+                    deviceInfoFrame.setUserName(users.get(0).get("nickname").toString());
+                    deviceInfoFrame.setVisible(true);
                     LoginFrame.this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(LoginFrame.this, "Invalid username or password.");

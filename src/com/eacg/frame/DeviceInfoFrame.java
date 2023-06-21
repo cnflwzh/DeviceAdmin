@@ -2,9 +2,8 @@ package com.eacg.frame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import com.eacg.tools.DBToolSet;
-
+import cn.hutool.core.date.DateUtil;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,16 @@ import java.util.List;
 import java.util.Map;
 
 public class DeviceInfoFrame extends JFrame {
+    private static String userName;
+
+    public static String getUserName() {
+        return userName;
+    }
+
+    public static void setUserName(String userName) {
+        DeviceInfoFrame.userName = userName;
+    }
+
     private JTextField deviceNameField;
     private JTextField deviceTypeField;
     private JTextField devicePriceField;
@@ -24,7 +33,7 @@ public class DeviceInfoFrame extends JFrame {
 
     public DeviceInfoFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1270, 960);
+        setSize(1100, 600);
         setLocationRelativeTo(null);
 
         // Top menu
@@ -61,15 +70,17 @@ public class DeviceInfoFrame extends JFrame {
         addDeviceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO new AddDeviceFrame().setVisible(true);
+                // Open add device frame
+                new AddDeviceFrame(DeviceInfoFrame.this).setVisible(true);
             }
         });
+
         actionsPanel.add(addDeviceButton);
         modifyDeviceButton = new JButton("修改设备");
         modifyDeviceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO new ModifyDeviceFrame().setVisible(true);
+                new ModifyDeviceFrame().setVisible(true);
             }
         });
         actionsPanel.add(modifyDeviceButton);
@@ -140,10 +151,26 @@ public class DeviceInfoFrame extends JFrame {
                     rowData[3] = device.get("device_price");
                     rowData[4] = device.get("device_purchase_date");
                     rowData[5] = device.get("device_use_limit");
-                    rowData[6] = device.get("device_discount_rate");
-                    rowData[7] = device.get("device_status");
-                    rowData[8] = device.get("device_is_maintain");
-                    rowData[9] = device.get("create_date");
+
+                    // Add percent sign after discount rate
+                    rowData[6] = device.get("device_discount_rate") + "%";
+
+                    // Translate device status to Chinese
+                    int deviceStatusTable = Integer.parseInt(String.valueOf(device.get("device_status")));
+                    if (deviceStatusTable == 0) {
+                        rowData[7] = "待分配";
+                    } else if (deviceStatusTable == 1) {
+                        rowData[7] = "已调拨";
+                    } else {
+                        rowData[7] = "报废";
+                    }
+
+                    // Translate maintenance status to Chinese
+                    int maintenanceStatus = Integer.parseInt(String.valueOf(device.get("device_is_maintain")));
+                    rowData[8] = maintenanceStatus == 0 ? "否" : "是";
+
+                    rowData[9] = DateUtil.format(DateUtil.parse(String.valueOf(device.get("create_date"))),
+                            "yyyy-MM-dd HH:mm:ss");
                     rowData[10] = device.get("create_user");
                     tableModel.addRow(rowData);
                 }
@@ -200,12 +227,34 @@ public class DeviceInfoFrame extends JFrame {
             rowData[3] = device.get("device_price");
             rowData[4] = device.get("device_purchase_date");
             rowData[5] = device.get("device_use_limit");
-            rowData[6] = device.get("device_discount_rate");
-            rowData[7] = device.get("device_status");
-            rowData[8] = device.get("device_is_maintain");
-            rowData[9] = device.get("create_date");
+
+            // Add percent sign after discount rate
+            rowData[6] = device.get("device_discount_rate") + "%";
+
+            // Translate device status to Chinese
+            int deviceStatus =Integer.parseInt(String.valueOf(device.get("device_status")));
+            if (deviceStatus == 0) {
+                rowData[7] = "待分配";
+            } else if (deviceStatus == 1) {
+                rowData[7] = "已调拨";
+            } else {
+                rowData[7] = "报废";
+            }
+
+            // Translate maintenance status to Chinese
+            int maintenanceStatus =Integer.parseInt(String.valueOf(device.get("device_is_maintain")));
+            rowData[8] = maintenanceStatus == 0 ? "否" : "是";
+
+            rowData[9] = DateUtil.format(DateUtil.parse(String.valueOf(device.get("create_date"))), "yyyy-MM-dd HH:mm:ss");
             rowData[10] = device.get("create_user");
             tableModel.addRow(rowData);
         }
+    }
+
+    public void reloadData() {
+        // Clear table
+        tableModel.setRowCount(0);
+        // Reload data
+        loadData();
     }
 }
