@@ -12,14 +12,23 @@ import java.util.List;
 import java.util.Map;
 
 public class DeviceInfoFrame extends JFrame {
-    private static String userName;
+    private String userName;
+    private String id;
 
-    public static String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public static void setUserName(String userName) {
-        DeviceInfoFrame.userName = userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     private JTextField deviceNameField;
@@ -38,12 +47,23 @@ public class DeviceInfoFrame extends JFrame {
 
         // Top menu
         JMenuBar menuBar = new JMenuBar();
-        menuBar.add(createMenu("用户信息管理", e -> System.out.println("用户信息管理")));
-        menuBar.add(createMenu("部门信息管理", e -> System.out.println("部门信息管理")));
-        menuBar.add(createMenu("设备维护管理", e -> System.out.println("设备维护管理")));
-        menuBar.add(createMenu("设备调拨管理", e -> System.out.println("设备调拨管理")));
+        menuBar.add(createMenu("用户信息管理", e -> {
+            UserInfoFrame userInfoFrame = new UserInfoFrame(DeviceInfoFrame.this);
+            userInfoFrame.setVisible(true);
+        }));
+        menuBar.add(createMenu("部门信息管理", e -> {
+            DepartmentInfoFrame departmentInfoFrame = new DepartmentInfoFrame(DeviceInfoFrame.this);
+            departmentInfoFrame.setVisible(true);
+        }));
+        menuBar.add(createMenu("设备维护管理", e -> {
+            DeviceMaintenanceFrame deviceMaintenanceFrame = new DeviceMaintenanceFrame(DeviceInfoFrame.this);
+            deviceMaintenanceFrame.setVisible(true);
+        }));
+        menuBar.add(createMenu("设备调拨管理", e -> {
+            DeviceAllocationFrame deviceAllocationFrame = new DeviceAllocationFrame(DeviceInfoFrame.this);
+            deviceAllocationFrame.setVisible(true);
+        }));
         setJMenuBar(menuBar);
-
         // Filter section
         JPanel filterPanel = new JPanel();
         filterPanel.setLayout(new FlowLayout());
@@ -70,7 +90,6 @@ public class DeviceInfoFrame extends JFrame {
         addDeviceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open add device frame
                 new AddDeviceFrame(DeviceInfoFrame.this).setVisible(true);
             }
         });
@@ -80,7 +99,18 @@ public class DeviceInfoFrame extends JFrame {
         modifyDeviceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ModifyDeviceFrame().setVisible(true);
+
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    String deviceId = (String) tableModel.getValueAt(selectedRow, 0);
+                    DeviceInfoFrame.this.setId(deviceId);
+                    DeviceInfoFrame.this.setUserName(deviceId);
+                    new ModifyDeviceFrame(DeviceInfoFrame.this).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(DeviceInfoFrame.this, "请先选择一个设备！", "错误", JOptionPane.ERROR_MESSAGE);
+                }
+
+                
             }
         });
         actionsPanel.add(modifyDeviceButton);
@@ -232,7 +262,7 @@ public class DeviceInfoFrame extends JFrame {
             rowData[6] = device.get("device_discount_rate") + "%";
 
             // Translate device status to Chinese
-            int deviceStatus =Integer.parseInt(String.valueOf(device.get("device_status")));
+            int deviceStatus = Integer.parseInt(String.valueOf(device.get("device_status")));
             if (deviceStatus == 0) {
                 rowData[7] = "待分配";
             } else if (deviceStatus == 1) {
@@ -242,10 +272,11 @@ public class DeviceInfoFrame extends JFrame {
             }
 
             // Translate maintenance status to Chinese
-            int maintenanceStatus =Integer.parseInt(String.valueOf(device.get("device_is_maintain")));
+            int maintenanceStatus = Integer.parseInt(String.valueOf(device.get("device_is_maintain")));
             rowData[8] = maintenanceStatus == 0 ? "否" : "是";
 
-            rowData[9] = DateUtil.format(DateUtil.parse(String.valueOf(device.get("create_date"))), "yyyy-MM-dd HH:mm:ss");
+            rowData[9] = DateUtil.format(DateUtil.parse(String.valueOf(device.get("create_date"))),
+                    "yyyy-MM-dd HH:mm:ss");
             rowData[10] = device.get("create_user");
             tableModel.addRow(rowData);
         }
