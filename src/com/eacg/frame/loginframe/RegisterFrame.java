@@ -1,4 +1,4 @@
-package com.eacg.frame;
+package com.eacg.frame.loginframe;
 
 import javax.swing.*;
 
@@ -25,9 +25,10 @@ public class RegisterFrame extends JFrame {
     Snowflake snowflake = IdUtil.getSnowflake(1,1);
 
     public RegisterFrame() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(300, 300);
         setLocationRelativeTo(null);
+        setTitle("注册");
 
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);

@@ -1,4 +1,4 @@
-package com.eacg.frame;
+package com.eacg.frame.deviceinfoframe;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -35,6 +35,7 @@ public class ModifyDeviceFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 400);
         setLocationRelativeTo(null);
+        setTitle("修改设备信息");
         String id = deviceInfoFrame.getId();
         String sql = "select * from busi_device_info where id = " + id;
         List<Map<String, Object>> selectResult = DBToolSet.selectSQL(sql);

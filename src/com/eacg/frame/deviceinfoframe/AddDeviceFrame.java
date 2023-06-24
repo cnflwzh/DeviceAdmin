@@ -1,4 +1,4 @@
-package com.eacg.frame;
+package com.eacg.frame.deviceinfoframe;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,6 +32,7 @@ public class AddDeviceFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
+        setTitle("添加设备信息");
         String userName = deviceInfoFrame.getUserName();
 
         JPanel panel = new JPanel();

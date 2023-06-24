@@ -1,7 +1,8 @@
-package com.eacg.frame;
+package com.eacg.frame.loginframe;
 
 import javax.swing.*;
 
+import com.eacg.frame.deviceinfoframe.DeviceInfoFrame;
 import com.eacg.tools.DBToolSet;
 
 
@@ -24,6 +25,7 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 150);
         setLocationRelativeTo(null);
+        setTitle("登录");
 
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
@@ -39,7 +41,7 @@ public class LoginFrame extends JFrame {
         add(loginButton);
 
         usernameField.setText("cnflwzh");
-        passwordField.setText("12345678");
+        passwordField.setText("123456");
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
