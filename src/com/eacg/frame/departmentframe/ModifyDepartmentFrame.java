@@ -42,7 +42,7 @@ public class ModifyDepartmentFrame extends JFrame {
         departmentCodeField.setText(String.valueOf(map.get("department_code")));
         panel.add(departmentCodeField);
 
-        addButton = new JButton("添加");
+        addButton = new JButton("修改");
         addButton.addActionListener(new ActionListener() {
 
             @Override

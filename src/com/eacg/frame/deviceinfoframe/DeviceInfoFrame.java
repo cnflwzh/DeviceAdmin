@@ -4,8 +4,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import com.eacg.frame.DeviceAllocationFrame;
-import com.eacg.frame.DeviceMaintenanceFrame;
 import com.eacg.frame.departmentframe.DepartmentInfoFrame;
+import com.eacg.frame.maintenanceframe.AddMaintenanceFrame;
+import com.eacg.frame.maintenanceframe.DeviceMaintenanceFrame;
 import com.eacg.frame.userframe.UserInfoFrame;
 import com.eacg.tools.DBToolSet;
 import cn.hutool.core.date.DateUtil;
@@ -43,12 +44,13 @@ public class DeviceInfoFrame extends JFrame {
     private JComboBox<String> deviceMaintenanceField;
     private JTable table;
     private DefaultTableModel tableModel;
-    private JButton searchButton, clearButton, addDeviceButton, modifyDeviceButton, deleteDeviceButton;
+    private JButton searchButton, clearButton, addDeviceButton, modifyDeviceButton, deleteDeviceButton,maintenanceButton,allocationButton;
 
     public DeviceInfoFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1100, 600);
         setLocationRelativeTo(null);
+        setTitle("设备信息管理");
 
         // Top menu
         JMenuBar menuBar = new JMenuBar();
@@ -138,6 +140,42 @@ public class DeviceInfoFrame extends JFrame {
                 }
             }
         });
+
+
+        maintenanceButton = new JButton("维护设备");
+        maintenanceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    DeviceInfoFrame.this.setId((String) tableModel.getValueAt(selectedRow, 0));
+
+                   new AddMaintenanceFrame(DeviceInfoFrame.this).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(DeviceInfoFrame.this, "请先选择一个设备！", "错误", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        actionsPanel.add(maintenanceButton);
+
+
+
+        allocationButton = new JButton("调拨设备");
+        allocationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Get device ID of selected row
+                    DeviceInfoFrame.this.setId((String) tableModel.getValueAt(selectedRow, 0));
+                    new AddAllocationFrame(DeviceInfoFrame.this).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(DeviceInfoFrame.this, "请先选择一个设备！", "错误", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        actionsPanel.add(allocationButton);
+
 
         actionsPanel.add(deleteDeviceButton);
         searchButton = new JButton("搜索");

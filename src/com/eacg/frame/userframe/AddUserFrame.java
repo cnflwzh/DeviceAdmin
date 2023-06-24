@@ -103,6 +103,7 @@ public class AddUserFrame extends JFrame {
                         SecureUtil.sha1(passwordField.getText()), phoneNumberField.getText(),
                         department_id.get(0).get("id"), new Date(), userInfoFrame.loginNickname, 0, 0);
                 JOptionPane.showMessageDialog(AddUserFrame.this, "添加成功");
+                userInfoFrame.refreshData();
                 dispose();
 
             }

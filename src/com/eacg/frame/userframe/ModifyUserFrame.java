@@ -86,7 +86,7 @@ public class ModifyUserFrame extends JFrame {
                 }
                 List<Map<String, Object>> haveUserName = DBToolSet
                         .selectSQL("select * from busi_userinfo where username=?", usernamField.getText());
-                if (haveUserName.size() > 0) {
+                if (haveUserName.size() > 1) {
                     JOptionPane.showMessageDialog(ModifyUserFrame.this, "用户名已存在");
                     return;
                 }
@@ -112,6 +112,8 @@ public class ModifyUserFrame extends JFrame {
                 params.add(id);
 
                 DBToolSet.updateSQL(sqlString.toString(), params.toArray());
+                JOptionPane.showMessageDialog(ModifyUserFrame.this, "修改成功");
+                userInfoFrame.refreshData();
                 ModifyUserFrame.this.dispose();
 
             }

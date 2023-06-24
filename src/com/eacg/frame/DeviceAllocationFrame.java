@@ -9,6 +9,9 @@ public class DeviceAllocationFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1100, 600);
         setLocationRelativeTo(null);
+        setTitle("设备调拨");
+
+
     }
 
 }

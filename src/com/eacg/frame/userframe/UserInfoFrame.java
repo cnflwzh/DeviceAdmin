@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class UserInfoFrame extends JFrame {
         setSize(1100, 600);
         setLocationRelativeTo(null);
         setTitle("用户信息管理");
-        this.loginNickname=deviceInfoFrame.getUserName();
+        this.loginNickname = deviceInfoFrame.getUserName();
         JPanel filterPanel = new JPanel();
         filterPanel.setLayout(new FlowLayout());
         filterPanel.add(new JLabel("昵称"));
@@ -67,7 +68,7 @@ public class UserInfoFrame extends JFrame {
                     return;
                 }
                 String id = (String) table.getValueAt(selectedRow, 0);
-                UserInfoFrame.this.userId=id;
+                UserInfoFrame.this.userId = id;
                 new ModifyUserFrame(UserInfoFrame.this).setVisible(true);
             }
         });
@@ -85,7 +86,7 @@ public class UserInfoFrame extends JFrame {
                 int result = JOptionPane.showConfirmDialog(UserInfoFrame.this, "确认删除？");
                 if (result == JOptionPane.OK_OPTION) {
                     DBToolSet.updateSQL("update busi_userinfo set is_deleted = 1 where id = ?", id);
-                     tableModel.setRowCount(0); 
+                    tableModel.setRowCount(0);
                     JOptionPane.showMessageDialog(UserInfoFrame.this, "删除成功");
                     loadData();
                 }
@@ -117,6 +118,12 @@ public class UserInfoFrame extends JFrame {
                     sql += " and department_id = ?";
                     params.add(department);
                 }
+                HashMap<String, String> departmentMap = new HashMap<String, String>();
+                List<Map<String, Object>> selectSQL = DBToolSet
+                        .selectSQL("select id,department_name from busi_department_info");
+                for (Map<String, Object> map : selectSQL) {
+                    departmentMap.put((String) map.get("id"), (String) map.get("department_name"));
+                }
                 List<Map<String, Object>> users = DBToolSet.selectSQL(sql, params.toArray());
                 tableModel.setRowCount(0);
                 for (Map<String, Object> user : users) {
@@ -125,13 +132,13 @@ public class UserInfoFrame extends JFrame {
                     rowData[1] = user.get("nickname");
                     rowData[2] = user.get("username");
                     rowData[3] = user.get("phone_number");
-                    rowData[4] = user.get("department_id");
+                    rowData[4] = departmentMap.get(user.get("department_id"));
                     rowData[5] = user.get("create_date");
                     tableModel.addRow(rowData);
                 }
             }
         });
-        
+
         clearButton = new JButton("清空");
         clearButton.addActionListener(new ActionListener() {
             @Override
@@ -148,7 +155,7 @@ public class UserInfoFrame extends JFrame {
         actionsPanel.add(searchButton);
         actionsPanel.add(clearButton);
 
-        String[] columnNames = { "ID","昵称", "用户名", "电话号", "部门", "创建时间" };
+        String[] columnNames = { "ID", "昵称", "用户名", "电话号", "部门", "创建时间" };
         tableModel = new DefaultTableModel(columnNames, 0);
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -164,6 +171,13 @@ public class UserInfoFrame extends JFrame {
     }
 
     private void loadData() {
+        HashMap<String, String> departmentMap = new HashMap<String, String>();
+        List<Map<String, Object>> selectSQL = DBToolSet
+                .selectSQL("select id,department_name from busi_department_info");
+        for (Map<String, Object> map : selectSQL) {
+            departmentMap.put((String) map.get("id"), (String) map.get("department_name"));
+        }
+
         List<Map<String, Object>> users = DBToolSet.selectSQL("SELECT * FROM busi_userinfo where is_deleted = 0");
         for (Map<String, Object> user : users) {
             Object[] rowData = new Object[6];
@@ -171,11 +185,15 @@ public class UserInfoFrame extends JFrame {
             rowData[1] = user.get("nickname");
             rowData[2] = user.get("username");
             rowData[3] = user.get("phone_number");
-            rowData[4] = user.get("department_id");
+            rowData[4] = departmentMap.get(user.get("department_id"));
             rowData[5] = user.get("create_date");
-         
-        
+
             tableModel.addRow(rowData);
         }
+    }
+
+    public void refreshData() {
+        tableModel.setRowCount(0);
+        loadData();
     }
 }
