@@ -3,9 +3,9 @@ package com.eacg.frame.deviceinfoframe;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import com.eacg.frame.DepartmentInfoFrame;
 import com.eacg.frame.DeviceAllocationFrame;
 import com.eacg.frame.DeviceMaintenanceFrame;
+import com.eacg.frame.departmentframe.DepartmentInfoFrame;
 import com.eacg.frame.userframe.UserInfoFrame;
 import com.eacg.tools.DBToolSet;
 import cn.hutool.core.date.DateUtil;

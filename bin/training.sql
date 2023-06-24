@@ -27,7 +27,7 @@ CREATE TABLE `busi_department_info`  (
   `department_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '部门CODE',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `create_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `update_date` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户',
   `is_deleted` int(1) NULL DEFAULT NULL COMMENT '是否删除0否1是',
   `status` int(1) NULL DEFAULT NULL COMMENT '0正常1禁用',
