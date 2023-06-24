@@ -3,7 +3,8 @@ package com.eacg.frame.deviceinfoframe;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import com.eacg.frame.DeviceAllocationFrame;
+import com.eacg.frame.allocationframe.AddAllocationFrame;
+import com.eacg.frame.allocationframe.DeviceAllocationFrame;
 import com.eacg.frame.departmentframe.DepartmentInfoFrame;
 import com.eacg.frame.maintenanceframe.AddMaintenanceFrame;
 import com.eacg.frame.maintenanceframe.DeviceMaintenanceFrame;

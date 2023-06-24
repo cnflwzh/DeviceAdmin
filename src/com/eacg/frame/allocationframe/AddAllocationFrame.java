@@ -1,4 +1,4 @@
-package com.eacg.frame.deviceinfoframe;
+package com.eacg.frame.allocationframe;
 
 import java.awt.GridLayout;
 import java.awt.Panel;
@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import com.eacg.frame.deviceinfoframe.DeviceInfoFrame;
 import com.eacg.tools.DBToolSet;
 
 import cn.hutool.core.lang.Snowflake;
