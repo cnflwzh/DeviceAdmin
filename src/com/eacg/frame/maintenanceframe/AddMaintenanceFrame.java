@@ -19,7 +19,6 @@ import com.eacg.tools.DBToolSet;
 import cn.hutool.core.lang.Snowflake;
 
 public class AddMaintenanceFrame extends JFrame {
-    private DeviceInfoFrame deviceInfoFrame;
     private JTextField deviceIdField;
     private JTextArea maintenanceInfoField;
     private JButton confirmButton, cancelButton;
@@ -30,7 +29,6 @@ public class AddMaintenanceFrame extends JFrame {
         setSize(400, 500);
         setLocationRelativeTo(null);
         setTitle("添加维护记录");
-        this.deviceInfoFrame = deviceInfoFrame;
         String editingId = deviceInfoFrame.getId();
 
         Panel panel = new Panel(new GridLayout(5, 2));

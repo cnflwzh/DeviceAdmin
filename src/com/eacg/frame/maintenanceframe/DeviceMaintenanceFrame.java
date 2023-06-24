@@ -20,16 +20,14 @@ import javax.swing.table.DefaultTableModel;
 import com.eacg.frame.deviceinfoframe.DeviceInfoFrame;
 import com.eacg.tools.DBToolSet;
 
-import cn.hutool.core.date.DateUtil;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class DeviceMaintenanceFrame extends JFrame {
-    private DeviceInfoFrame deviceInfoFrame;
     private JTextField deviceIdField, maintenanceIdField, maintenanceContentField;
     private JDatePickerImpl maintenanceDatePicker;
-    private JButton addMaintenanceButton, deleteMaintenanceButton, updateMaintenanceButton, searchMaintenanceButton,
+    private JButton deleteMaintenanceButton, updateMaintenanceButton, searchMaintenanceButton,
             clearMaintenanceButton;
     private JTable table;
     private DefaultTableModel tableModel;
@@ -39,8 +37,6 @@ public class DeviceMaintenanceFrame extends JFrame {
         setSize(1100, 600);
         setLocationRelativeTo(null);
         setTitle("设备维护");
-        this.deviceInfoFrame = deviceInfoFrame;
-
         JPanel filterPanel = new JPanel();
         filterPanel.setLayout(new FlowLayout());
         filterPanel.add(new JLabel("设备ID"));

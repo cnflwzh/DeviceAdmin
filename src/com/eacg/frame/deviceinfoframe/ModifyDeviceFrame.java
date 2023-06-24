@@ -25,13 +25,10 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class ModifyDeviceFrame extends JFrame {
     private JTextField deviceNameField, deviceTypeField, devicePriceField, deviceDiscountRateField;
     private JButton confirmButton, cancelButton;
-    private DeviceInfoFrame deviceInfoFrame;
     private JDatePickerImpl devicePurchaseDatePicker, deviceUseLimitDatePicker;
     private JComboBox<String> deviceStatusComboBox, deviceMaintainComboBox;
 
     ModifyDeviceFrame(DeviceInfoFrame deviceInfoFrame) {
-        this.deviceInfoFrame = deviceInfoFrame;
-        String userName = deviceInfoFrame.getUserName();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 400);
         setLocationRelativeTo(null);

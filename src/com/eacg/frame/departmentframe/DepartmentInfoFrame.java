@@ -53,7 +53,7 @@ public class DepartmentInfoFrame extends JFrame {
 
         JPanel actionsPanel = new JPanel();
         actionsPanel.setLayout(new FlowLayout());
-        this.loginUserName = deviceInfoFrame.getUserName();
+        DepartmentInfoFrame.loginUserName = deviceInfoFrame.getUserName();
         addButton = new JButton("添加部门");
         addButton.addActionListener(e -> new AddDepartmentFrame(DepartmentInfoFrame.this).setVisible(true));
         modifyButton = new JButton("修改部门");

@@ -18,7 +18,6 @@ import cn.hutool.core.lang.Snowflake;
 
 public class AddDepartmentFrame extends JFrame {
     private JTextField departmentNameField, departmentCodeField;
-    private DepartmentInfoFrame departmentInfoFrame;
     private JButton addButton, cancelButton;
     Snowflake snowflake = new Snowflake(1, 1);
 
@@ -53,7 +52,7 @@ public class AddDepartmentFrame extends JFrame {
                     return;
                 }
                 String sql = "insert into busi_department_info(id,department_name,department_code,create_user,create_date,is_deleted,status) values(?,?,?,?,?,0,0)";
-                DBToolSet.insertSQL(sql, snowflake.nextId(), departmentName, departmentCode, departmentInfoFrame.loginUserName, new Date());
+                DBToolSet.insertSQL(sql, snowflake.nextId(), departmentName, departmentCode, DepartmentInfoFrame.loginUserName, new Date());
                 JOptionPane.showMessageDialog(AddDepartmentFrame.this, "添加成功");
                 departmentInfoFrame.refreshTable();
                 dispose();

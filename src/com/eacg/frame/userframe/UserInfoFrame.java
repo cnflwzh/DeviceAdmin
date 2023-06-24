@@ -5,7 +5,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.eacg.frame.deviceinfoframe.DeviceInfoFrame;
 import com.eacg.tools.DBToolSet;
-import cn.hutool.core.date.DateUtil;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,15 +22,12 @@ public class UserInfoFrame extends JFrame {
     private JComboBox<String> departmentComboBox;
     private JTable table;
     private DefaultTableModel tableModel;
-    private DeviceInfoFrame deviceInfoFrame;
-
     public UserInfoFrame(DeviceInfoFrame deviceInfoFrame) {
-        this.deviceInfoFrame = deviceInfoFrame;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1100, 600);
         setLocationRelativeTo(null);
         setTitle("用户信息管理");
-        this.loginNickname = deviceInfoFrame.getUserName();
+        UserInfoFrame.loginNickname = deviceInfoFrame.getUserName();
         JPanel filterPanel = new JPanel();
         filterPanel.setLayout(new FlowLayout());
         filterPanel.add(new JLabel("昵称"));
@@ -68,7 +64,7 @@ public class UserInfoFrame extends JFrame {
                     return;
                 }
                 String id = (String) table.getValueAt(selectedRow, 0);
-                UserInfoFrame.this.userId = id;
+                UserInfoFrame.userId = id;
                 new ModifyUserFrame(UserInfoFrame.this).setVisible(true);
             }
         });

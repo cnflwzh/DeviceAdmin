@@ -20,15 +20,13 @@ public class AddDeviceFrame extends JFrame {
     private JTextField deviceTypeField;
     private JTextField devicePriceField;
     private JTextField deviceDiscountRateField;
-    private JButton confirmButton, cancelButton;
-    private DeviceInfoFrame deviceInfoFrame;
+    private JButton confirmButton;
     Snowflake snowflake = IdUtil.getSnowflake(1, 1);
     private JDatePickerImpl devicePurchaseDatePicker;
     private JDatePickerImpl deviceUseLimitDatePicker;
     
 
     public AddDeviceFrame(DeviceInfoFrame deviceInfoFrame) {
-        this.deviceInfoFrame = deviceInfoFrame;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);

@@ -27,7 +27,6 @@ public class AddUserFrame extends JFrame {
     private JTextField nickNameField, usernamField, phoneNumberField;
     private JPasswordField passwordField;
     private JButton confirmButton, cancelButton;
-    private UserInfoFrame userInfoFrame;
     private JComboBox<String> departmentComboBox;
     Snowflake snowflake = IdUtil.getSnowflake(1, 1);
 
@@ -101,7 +100,7 @@ public class AddUserFrame extends JFrame {
                 String sqlString = "insert into busi_userinfo(id,nickname,username,password,phone_number,department_id,create_date,create_user,is_deleted,status)value(?,?,?,?,?,?,?,?,?,?)";
                 DBToolSet.insertSQL(sqlString, snowflake.nextId(), nickNameField.getText(), usernamField.getText(),
                         SecureUtil.sha1(passwordField.getText()), phoneNumberField.getText(),
-                        department_id.get(0).get("id"), new Date(), userInfoFrame.loginNickname, 0, 0);
+                        department_id.get(0).get("id"), new Date(), UserInfoFrame.loginNickname, 0, 0);
                 JOptionPane.showMessageDialog(AddUserFrame.this, "添加成功");
                 userInfoFrame.refreshData();
                 dispose();

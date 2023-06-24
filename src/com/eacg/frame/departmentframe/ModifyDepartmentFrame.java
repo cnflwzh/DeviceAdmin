@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -18,7 +17,6 @@ import com.eacg.tools.DBToolSet;
 
 public class ModifyDepartmentFrame extends JFrame {
     private JTextField departmentNameField, departmentCodeField;
-    private DepartmentInfoFrame departmentInfoFrame;
     private JButton addButton, cancelButton;
 
     public ModifyDepartmentFrame(DepartmentInfoFrame departmentInfoFrame) {
@@ -29,7 +27,7 @@ public class ModifyDepartmentFrame extends JFrame {
         JPanel panel = new JPanel();
         Map<String, Object> map = DBToolSet
                 .selectSQL("select * from busi_department_info where is_deleted=0 and id=?",
-                        departmentInfoFrame.editingId)
+                        DepartmentInfoFrame.editingId)
                 .get(0);
 
         panel.setLayout(new GridLayout(3, 2));
@@ -60,7 +58,7 @@ public class ModifyDepartmentFrame extends JFrame {
                 String sql = "update busi_department_info set department_name=?,department_code=?,update_user=?,update_date=? where id=?";
 
                 DBToolSet.updateSQL(sql, departmentName, departmentCode,
-                        departmentInfoFrame.loginUserName, new Date(), departmentInfoFrame.editingId);
+                        DepartmentInfoFrame.loginUserName, new Date(), DepartmentInfoFrame.editingId);
                 JOptionPane.showMessageDialog(ModifyDepartmentFrame.this, "修改成功");
                 departmentInfoFrame.refreshTable();
                 dispose();

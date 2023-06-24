@@ -26,7 +26,6 @@ public class ModifyUserFrame extends JFrame {
     private JTextField nickNameField, usernamField, phoneNumberField;
     private JPasswordField passwordField;
     private JButton confirmButton, cancelButton;
-    private UserInfoFrame userInfoFrame;
     private JComboBox<String> departmentComboBox;
 
     public ModifyUserFrame(UserInfoFrame userInfoFrame) {
@@ -34,7 +33,7 @@ public class ModifyUserFrame extends JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
         setTitle("修改用户信息");
-        String id = userInfoFrame.userId;
+        String id = UserInfoFrame.userId;
 
         String sqlString = "select * from busi_userinfo where id=?";
         List<Map<String, Object>> selectSQL = DBToolSet.selectSQL(sqlString, id);
@@ -108,7 +107,7 @@ public class ModifyUserFrame extends JFrame {
                 params.add(phoneNumberField.getText());
                 params.add(department_id.get(0).get("id"));
                 params.add(new Date());
-                params.add(userInfoFrame.loginNickname);
+                params.add(UserInfoFrame.loginNickname);
                 params.add(id);
 
                 DBToolSet.updateSQL(sqlString.toString(), params.toArray());
