@@ -20,10 +20,9 @@ public class DeviceAllocationUpdateFrame extends JFrame {
 
     public DeviceAllocationUpdateFrame(DeviceAllocationFrame deviceAllocationFrame, String id) {
         this.setSize(500, 400);
-        this.setTitle("添加设备分配信息");
+        this.setTitle("修改设备分配信息");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        deviceAllocationFrame.setEnabled(false);
 
         Panel panel = new Panel(new GridLayout(5, 2));
         panel.add(new JLabel("调拨编号："));
