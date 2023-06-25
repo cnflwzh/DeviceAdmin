@@ -11,8 +11,6 @@ import javax.swing.JTextField;
 
 import com.eacg.tools.DBToolSet;
 
-import cn.hutool.core.lang.Snowflake;
-
 public class DeviceAllocationUpdateFrame extends JFrame {
     private JComboBox<String> departmentComboBox;
     private JTextField allocationIdField, deviceIdField;
